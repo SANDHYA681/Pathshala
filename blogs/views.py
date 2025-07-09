@@ -17,6 +17,12 @@ def validate_blog(data):
         errors['content']="The content must be minimum 10 characters long "
     if tags == "":
         errors['tags']= "Atleast one tag in required"
+        
+    else:
+        splitted_tags = tags.split(',')
+        for tag in splitted_tags:
+            if len(tag)<3 or len(tag)>1:
+                errors['tags']= "Tag must be at least 3 and max 15 char long"
     if image:
         allowed_extensions = ['.jpg', '.png', '.jpeg']
         if image.size> 5*1024*1024:
