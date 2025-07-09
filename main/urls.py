@@ -43,7 +43,8 @@ urlpatterns = [
     path('about/', aboutPage),
     path('auth/', include(auth_urlpatterns)),
     path('blogs/',blogPage ),
-    path('profile/', profilePage ),    
+    path('profile/', profilePage ),
+    path('blog/', include(blog_urlpatterns)),
 ]
 
 if settings.DEBUG:
