@@ -69,6 +69,8 @@ def createBlog(request):
             author = request.user
         )
         blog.tags.add(*data['tags'].split(","))
+        #Alternatoive way
+        # blog.tags.add(*(tag.strip()for tag in data['tags']))
         
 
         messages.success(request, "Blog Created Successfully!")
