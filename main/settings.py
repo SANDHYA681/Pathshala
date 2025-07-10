@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'users',
     'blogs',
     'taggit',
-    
 ]
+
 TAGGIT_CASE_INSENSITIVE = True
 
 MIDDLEWARE = [
