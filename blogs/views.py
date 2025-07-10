@@ -1,5 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
+from blogs.models import Blog
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url ='/auth/log-in')
 
 def addBlogPage(request):
     return render(request, 'pages/blogs/addBlogPage.html')
@@ -11,9 +15,9 @@ def validate_blog(data):
     tags= data.get('tags')
     image= data.get('image')
     attachment= data.get('attachment')
-    if len(title)<3 or len(title)>50:
+    if len(title)<1 or len(title)>30:
         errors['title']= 'The title should be minimum 3 and maximum 50 characters long'
-    if len(content)<10:
+    if len(content)<1:
         errors['content']="The content must be minimum 10 characters long "
     if tags == "":
         errors['tags']= "Atleast one tag in required"
@@ -23,6 +27,8 @@ def validate_blog(data):
         for tag in splitted_tags:
             if len(tag)<3 or len(tag)>1:
                 errors['tags']= "Tag must be at least 3 and max 15 char long"
+            if len(splitted_tags)>5:
+                errors['tags'] = ""
     if image:
         allowed_extensions = ['.jpg', '.png', '.jpeg']
         if image.size> 5*1024*1024:
@@ -44,5 +50,10 @@ def createBlog(request):
         if errors:
             return render (request, 'pages/blogs/addBlogPage.html',{"errors":errors })
         
-        messages.success(request, "Blog Created succesfully")
-        return redirect('/blogs')
+    blog=Blog.objects.create(title= data['title'], tags= data['tags'], content = data['content'], image = data['image'], attachment = data['attachment'],
+        author =  request.user
+        )
+        
+    blog.tags.add(data['tags'].split(",")) #split() separate the data and keep[s in list and * unwraps the list]
+    messages.success(request, "Blog Created succesfully")
+    return redirect("/blogs")
