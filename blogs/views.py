@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/auth/log-in')
 def addBlogPage(request):
-    categories= Category.object.get()
+    categories= Category.objects.all()
     return render(request, "pages/blogs/addBlogPage.html", {"categories": categories})
 
 
