@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 
+class Category (models. Model):
+    name= models.CharField(max_length=50)
+
 class Blog(models.Model):
     def generateImagePath(instance, filename):
         return f'blog/{instance.author.username}/images/{filename}'
@@ -13,10 +16,13 @@ class Blog(models.Model):
         ACTIVE = "Active", "Active"
         INACTIVE = "Inactive", "Inactive"
     
+    
+    
     title = models.CharField(max_length=50 )
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     tags = TaggableManager(blank=True)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
     image = models.ImageField(blank=True, null=True , upload_to=generateImagePath, default='static/images/blog1.png')
     attachment = models.FileField(blank=True, null=True, upload_to=generateAttachmentPath)
     status = models.CharField(max_length=8, choices=StatusOptions, default=StatusOptions.INACTIVE)
