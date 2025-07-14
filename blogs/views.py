@@ -16,6 +16,7 @@ def validate_blog(data):
     tags = data.get("tags")
     image = data.get("image")
     attachment = data.get("attachment")
+    category = data["category"],
 
     if len(title) < 3 or len(title) > 50:
         errors["title"] = (
@@ -61,13 +62,15 @@ def createBlog(request):
         errors = validate_blog(data)
         if errors:
             return render(request, "pages/blogs/addBlogPage.html", {"errors": errors})
+        category = Category.objects.get( name = data['category'] )
 
         blog = Blog.objects.create(
             title=data["title"],
             content=data["content"],
             image=data["image"],
             attachment=data["attachment"],
-            author = request.user
+            author = request.user,
+            category=category,
         )
         # blog.tags.add(*data['tags'].split(",")) # split() seperates the data and keeps in list and * unwraps the list
         #Alternative Way
