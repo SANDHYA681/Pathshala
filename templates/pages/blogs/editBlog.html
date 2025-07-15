@@ -35,7 +35,7 @@
         </div>
         <div class="space-y-2">
           <label for="tags" class="block text-sm font-semibold text-gray-700 normal-case">Tags</label>
-          <input value="{{blog.tags.all}}" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="text" id="tags" name="tags" placeholder="Enter your tags" />
+          <input value="{{tags}}" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="text" id="tags" name="tags" placeholder="Enter your tags" />
           {% if errors.tags %}
             <span class="text-sm text-red-500">{{ errors.tags }}</span>
           {% endif %}
