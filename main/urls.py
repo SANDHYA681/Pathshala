@@ -36,8 +36,10 @@ auth_urlpatterns = [
 blog_urlpatterns = [
     path("add", addBlogPage),
     path("create", createBlog),
-    path("<int:id>", blogDetails),  # "blog/{{blog.id}}" e.g: "blog/1"
+    path("<int:id>", blogDetails),          # blog/1
+    path("edit/<int:id>", editBlog),    # blog/edit/1
 ]
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
