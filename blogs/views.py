@@ -84,4 +84,4 @@ def editBlog(request, id):
     blog = Blog.objects.get(id=id)
     categories = Category.objects.all()
     tags = "," .join(blog.tags.names())
-    return render(request, 'pages/blogs/editBlog.html', {"blog": blog, "categories": categories})
+    return render(request, 'pages/blogs/editBlog.html', {"blog": blog, "categories": categories, 'tags': tags})
