@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/auth/log-in')
 def addBlogPage(request):
-    categories= Category.objects.all()
+    categories = Category.objects.all()
     return render(request, "pages/blogs/addBlogPage.html", {"categories": categories})
 
 
@@ -16,7 +16,6 @@ def validate_blog(data):
     tags = data.get("tags")
     image = data.get("image")
     attachment = data.get("attachment")
-    category = data["category"],
 
     if len(title) < 3 or len(title) > 50:
         errors["title"] = (
@@ -62,15 +61,14 @@ def createBlog(request):
         errors = validate_blog(data)
         if errors:
             return render(request, "pages/blogs/addBlogPage.html", {"errors": errors})
-        category = Category.objects.get( name = data['category'] )
-
+        category = Category.objects.get( pk = data['category'] )
         blog = Blog.objects.create(
             title=data["title"],
             content=data["content"],
             image=data["image"],
             attachment=data["attachment"],
-            author = request.user,
-            category=category,
+            author = request.user, 
+            category = category,
         )
         # blog.tags.add(*data['tags'].split(",")) # split() seperates the data and keeps in list and * unwraps the list
         #Alternative Way
