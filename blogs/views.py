@@ -79,3 +79,8 @@ def createBlog(request):
 def blogDetails(request,id):
     blog = Blog.objects.get(id=id)
     return render( request, 'pages/blogs/blogDetails.html', {"blog": blog})
+
+def editBlogPage(request, id):
+    blog = Blog.objects.get(id=id)
+    categories = Category.objects.all()
+    return render(request, 'pages/blogs/editBlogPage.html')
