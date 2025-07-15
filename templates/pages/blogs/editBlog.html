@@ -12,15 +12,15 @@
         <div class="w-20 h-20 mx-auto mb-4 rounded-full border-2 border-green-600 flex items-center justify-center shadow-lg">
           <img src="/static/images/favicon.ico" alt="Digital Pathshala Logo" />
         </div>
-        <h1 class="text-2xl font-bold text-green-800 mb-2 normal-case">Edit  Blog</h1>
+        <h1 class="text-2xl font-bold text-green-800 mb-2 normal-case">Edit Blog Page</h1>
       </div>
       <!-- Blog Form -->
-      <form class="space-y-4" method="post" action="/blo/update/{{blog.id}}" enctype="multipart/form-data">
+      <form class="space-y-4" method="post" action="/blog/update/{{blog.id}}" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="space-y-2">
           <label for="title" class="block text-sm font-semibold text-gray-700 normal-case">Title</label>
-          <input value = "{{blog.title}}" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="text" id="title" name="title" placeholder="Enter your Title" />
+          <input value="{{blog.title}}" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="text" id="title" name="title" placeholder="Enter your Title" />
           {% if errors.title %}
             <span class="text-sm text-red-500">{{ errors.title }}</span>
           {% endif %}
@@ -28,14 +28,14 @@
 
         <div class="space-y-2">
           <label for="content" class="block text-sm font-semibold text-gray-700 normal-case">Content</label>
-          <textarea rows="4" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="text" id="content" name="content" placeholder="Enter your content"></textarea>
+          <textarea rows="4" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="text" id="content" name="content">{{blog.content}}</textarea>
           {% if errors.content %}
             <span class="text-sm text-red-500">{{ errors.content }}</span>
           {% endif %}
         </div>
         <div class="space-y-2">
           <label for="tags" class="block text-sm font-semibold text-gray-700 normal-case">Tags</label>
-          <input value = "{{blog.title}}"  class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="text" id="tags" name="tags" placeholder="Enter your tags" />
+          <input value="{{blog.tags.all}}" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="text" id="tags" name="tags" placeholder="Enter your tags" />
           {% if errors.tags %}
             <span class="text-sm text-red-500">{{ errors.tags }}</span>
           {% endif %}
@@ -43,9 +43,9 @@
         <div class="space-y-2">
           <label for="category" class="block text-sm font-semibold text-gray-700 normal-case">Category</label>
           <select name="category" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none">
-            <option value="">Select</option>
+            <option value="{{blog.category}}">{{blog.category}}</option>
             {% for category in categories %}
-              <option value="{{ category.id }}">{{ category }}</option>
+              <option value="{{ category }}">{{ category.name }}</option>
             {% endfor %}
           </select>
           {% if errors.categories %}
@@ -54,14 +54,14 @@
         </div>
         <div class="space-y-2">
           <label for="image" class="block text-sm font-semibold text-gray-700 normal-case">Image</label>
-          <input value = "{{blog.title}}"  class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="file" id="image" name="image" />
+          <input value="{{blog.title}}" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="file" id="image" name="image" />
           {% if errors.image %}
             <span class="text-sm text-red-500">{{ errors.image }}</span>
           {% endif %}
         </div>
         <div class="space-y-2">
           <label for="attachment" class="block text-sm font-semibold text-gray-700 normal-case">Attachment</label>
-          <input value = "{{blog.title}}"  class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="file" id="attachment" name="attachment" />
+          <input value="{{blog.title}}" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none" type="file" id="attachment" name="attachment" />
           {% if errors.attachment %}
             <span class="text-sm text-red-500">{{ errors.attachment }}</span>
           {% endif %}
