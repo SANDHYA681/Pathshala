@@ -105,11 +105,11 @@ def updateBlog(request, id):
           if data['attachment']:
               blog.attachment = data["attachment"]
               
-          category = Category.objects.get( pk = data['category'] )
+          category = Category.objects.get( name = data['category'] )
           blog.category = category
           blog.tags.set([tag.strip() for tag in data['tags'].split(',')])
           blog.save()
           messages.success(request, "Blog Updated Successfully!")
-          return redirect(f'/blogs/{blog.id}')
+          return redirect(f'/blog/{blog.id}')
           
      
