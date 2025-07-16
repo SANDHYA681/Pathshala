@@ -96,8 +96,9 @@ def updateBlog(request, id):
       if errors:
           categories = Category.objects.all()
           tags = data['tags']
-          return render(request, "pages/blogs/editBlog.html", {"errors": errors, "blog":data, "categories": categories })
-      
+          data['category']= Category.objects.get(name = data['category'])
+          context= {"errors": errors, "blog":data, "categories":categories, 'tags':tags}
+          return render(request, "pages/blogs/editBlog.html",context)
       else:
           blog = Blog.objects.get(pk=id)
           blog.title = data["title"]
