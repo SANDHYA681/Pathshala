@@ -95,6 +95,7 @@ def updateBlog(request, id):
       errors = validate_blog(data)
       if errors:
           categories = Category.objects.all()
+          tags = data['tags']
           return render(request, "pages/blogs/editBlog.html", {"errors": errors, "blog":data, "categories": categories })
       
       else:
