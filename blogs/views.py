@@ -94,7 +94,8 @@ def updateBlog(request, id):
       data["attachment"] = request.FILES.get("attachment")
       errors = validate_blog(data)
       if errors:
-          return render(request, "pages/blogs/editBlog.html", {"errors": errors})
+          categories = Category.objects.all()
+          return render(request, "pages/blogs/editBlog.html", {"errors": errors, "blog":data, "categories": categories })
       
       else:
           blog = Blog.objects.get(pk=id)
