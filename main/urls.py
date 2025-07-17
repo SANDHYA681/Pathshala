@@ -41,6 +41,10 @@ blog_urlpatterns = [
     path("update/<int:id>", updateBlog),
 ]
 
+writer_urlpatterns=[
+    path("dashboard", dashboard),
+    
+]
 
 urlpatterns = [
     path("admin/", admin.site.urls),

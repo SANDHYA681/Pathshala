@@ -21,3 +21,8 @@ def blogPage(request):
 @login_required(login_url='/auth/log-in/')
 def profilePage(request):
     return render(request, 'pages/auth/profile.html')
+
+
+
+def dashboard(request):
+    return render(request, 'pages/dashboard/dashboard.html')  # new
