@@ -41,10 +41,11 @@ blog_urlpatterns = [
     path("update/<int:id>", updateBlog),
 ]
 
-writer_urlpatterns=[
+writer_urlpatterns = [
     path("dashboard", dashboard),
-    
+    path("bloglist", blogList),  
 ]
+
 
 
 urlpatterns = [

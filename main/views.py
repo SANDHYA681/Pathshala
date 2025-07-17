@@ -26,3 +26,7 @@ def profilePage(request):
 
 def dashboard(request):
     return render(request, 'pages/dashboard/dashboard.html')  # new
+
+
+def blogList(request):
+    return render(request, 'pages/dashboard/blogList.html')
