@@ -55,7 +55,7 @@ urlpatterns = [
     path("blogs/", blogPage),
     path("profile/", profilePage),
     path("blog/", include(blog_urlpatterns)),
-    path("writer/", include(writer_urlpatterns))
+    path("writer/", include(writer_urlpatterns)),
 ]
 
 if settings.DEBUG:

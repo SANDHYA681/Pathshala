@@ -1,5 +1,16 @@
 {%extends 'layouts/main.html'%}
-{% block title %} Admin Dashboard {% endblock %}
-{% block content %}
-This is admin
-{% endblock %}
+{%block title%} Admin Dashboard{%endblock%}
+{%block content%}
+<div>
+    <nav class ="grid grid-cols-5 gap-4">
+        <div>
+            <a href="/writer/blogs"></a>
+        </div>
+        <div>
+            <a href="/writer/bloglist"></a>
+        </div>
+        
+    </nav>
+    </div>
+
+{%endblock%}
