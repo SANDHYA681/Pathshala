@@ -46,6 +46,7 @@ writer_urlpatterns=[
     
 ]
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", landingPage),
@@ -54,6 +55,7 @@ urlpatterns = [
     path("blogs/", blogPage),
     path("profile/", profilePage),
     path("blog/", include(blog_urlpatterns)),
+    path("writer/", include(writer_urlpatterns))
 ]
 
 if settings.DEBUG:
