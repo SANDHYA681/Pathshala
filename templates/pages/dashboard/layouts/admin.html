@@ -2,15 +2,20 @@
 {%block title%} Admin Dashboard{%endblock%}
 {%block content%}
 <div>
-    <nav class ="grid grid-cols-5 gap-4">
-        <div>
-            <a href="/writer/blogs"></a>
+    <div class ="grid grid-cols-5 gap-4">
+        <nav class="text-md font-semibold border-2 border-gray-200 rounded-lg p-4 px-2 bg-gray-100 space-y-3">
+        <div class="">
+            <a class="hover:text-green-700 hover:text-[17px] duration-300" href="/writer/blogs">My Blogs</a>
         </div>
         <div>
-            <a href="/writer/bloglist"></a>
+            <a  lass="hover:text-green-700 hover:text-[17px] duration-300" href="/writer/bloglist">Blog List</a>
         </div>
-        
+
     </nav>
     </div>
+    {%block panel%}
+    {%endblock%}
+    </div>
+</div>
 
 {%endblock%}
