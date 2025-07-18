@@ -1,7 +1,27 @@
-{%extends 'pages/dashboard/layouts/admin.html'%}
-{%block panel%}
+{% extends 'pages/dashboard/layouts/admin.html' %}
+{% block panel %}
 <div>
-    This is blog list.
+    <h2 class="text-2xl text-green-700 underline text-center font-bold mb-4">Blog List</h2>
+    
+    <div class="flex flex-col gap-4">
+        {% for blog in blogs %}
+        <div class="bg-gray-100 border border-gray-300 rounded-xl p-4 hover:scale-[101%] transition-transform duration-300">
+            <h3 class="text-xl font-semibold text-green-600">{{ blog.title }}</h3>
+            <p class="text-sm text-gray-500">Created: {{ blog.created_at }}</p>
+            <p class="text-sm text-gray-500">Updated: {{ blog.updated_at }}</p>
+            
+            <div class="mt-2 flex gap-4">
+                <a href="/blog/{{ blog.id }}" class="text-blue-500 font-medium hover:underline">View</a>
+                <a href="/blog/edit/{{ blog.id }}" class="text-yellow-600 font-medium hover:underline">Edit</a>
+                <form action="/blog/delete/{{ blog.id }}" method="post" class="inline-block">
+                    {% csrf_token %}
+                    <button type="submit" class="py-1 px-3 bg-red-600 text-white rounded-md hover:bg-red-700">Delete</button>
+                </form>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-gray-500">No blogs found.</p>
+        {% endfor %}
+    </div>
 </div>
-
-{%endblock%}
+{% endblock %}

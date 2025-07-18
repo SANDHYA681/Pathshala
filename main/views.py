@@ -30,4 +30,4 @@ def dashboard(request):
 
 def blogList(request):
     blogs=  Blog.objects.filter( author = request.user).order_by('-created_at')
-    return render(request, 'pages/dashboard/blogList.html'{'blogs':blogs})
+    return render(request, 'pages/dashboard/blogList.html',{'blogs':blogs})
