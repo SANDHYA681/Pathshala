@@ -22,12 +22,10 @@ def blogPage(request):
 def profilePage(request):
     return render(request, 'pages/auth/profile.html')
 
-
-
+@login_required(login_url='/auth/log-in/')
 def dashboard(request):
-    return render(request, 'pages/dashboard/dashboard.html')  
-
+    return render(request, 'pages/dashboard/dashboard.html')
 
 def blogList(request):
-    blogs=  Blog.objects.filter( author = request.user).order_by('-created_at')
-    return render(request, 'pages/dashboard/blogList.html',{'blogs':blogs})
+    blogs = Blog.objects.filter( author = request.user).order_by('-created_at')
+    return render(request, 'pages/dashboard/blogList.html', {'blogs':blogs})
