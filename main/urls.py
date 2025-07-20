@@ -39,6 +39,7 @@ blog_urlpatterns = [
     path("<int:id>", blogDetails),          # blog/1
     path("edit/<int:id>", editBlog),    # blog/edit/1
     path("update/<int:id>", updateBlog),
+    path("delete/<int:id>", deleteBlog),
 ]
 
 writer_urlpatterns = [

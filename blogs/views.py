@@ -114,5 +114,13 @@ def updateBlog(request, id):
           blog.save()
           messages.success(request, "Blog Updated Successfully!")
           return redirect(f'/blog/{blog.id}')
+      
+      
+def deleteBlog(request, id):
+    if request.method =='POST':
+     blog = Blog.objects.get(pk=id)
+     blog.delete()
+    messages.success(request, "Blog Deleted Successfully!")
+    return redirect('/writer/bloglist')
           
      
