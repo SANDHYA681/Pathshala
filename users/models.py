@@ -10,12 +10,17 @@ class Profile(models.Model):
         Female = "Female", "Female"
         Others = "Others", "Others"
         
+    class RoleOptions(models.TextChoices):
+        Admin = "Admin", "Admin"
+        User = "User", "User"
+        
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     address = models.CharField(blank=True, null=True, max_length=50)
     phone = models.CharField(blank=True, null=True, max_length=10)
     nationality = models.CharField(blank=True, null=True, max_length=15, default="Nepal")
     gender = models.CharField(choices=GenderOptions, default=GenderOptions.Male, max_length=6)
     profile_image = models.ImageField( blank=True, null=True, upload_to=generateImagePath, default="users/default_user.png")
+    role = models.CharField(choices=RoleOptions, default=RoleOptions.User, max_length=5)
     dob = models.DateField(blank=True, null=True)
     
     def __str__(self):
