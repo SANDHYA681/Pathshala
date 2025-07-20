@@ -62,6 +62,7 @@ def createBlog(request):
         if errors:
             return render(request, "pages/blogs/addBlogPage.html", {"errors": errors})
         category = Category.objects.get( pk = data['category'] )
+        #if admin is creating the blog the status should be active otherwise pending
         if request.user.profile.role == "Admin":
             status= "Active"
         else:
