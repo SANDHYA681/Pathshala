@@ -62,6 +62,10 @@ def createBlog(request):
         if errors:
             return render(request, "pages/blogs/addBlogPage.html", {"errors": errors})
         category = Category.objects.get( pk = data['category'] )
+        if request.user.profile.role == "Admin":
+            status= "Active"
+        else:
+            status = "Pending"
         blog = Blog.objects.create(
             title=data["title"],
             content=data["content"],
