@@ -47,10 +47,14 @@ writer_urlpatterns = [
     path("bloglist", blogList),  
 ]
 
+admin_urlpatterns=[
+    path('dashboard', adminDashboard)
+]
+
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("super-admin/", admin.site.urls),
     path("", landingPage),
     path("about/", aboutPage),
     path("auth/", include(auth_urlpatterns)),
@@ -58,6 +62,7 @@ urlpatterns = [
     path("profile/", profilePage),
     path("blog/", include(blog_urlpatterns)),
     path("writer/", include(writer_urlpatterns)),
+    path("admin/", include(admin_urlpatterns)),
 ]
 
 if settings.DEBUG:
