@@ -36,22 +36,21 @@ auth_urlpatterns = [
 blog_urlpatterns = [
     path("add", addBlogPage),
     path("create", createBlog),
-    path("<int:id>", blogDetails),          # blog/1
-    path("edit/<int:id>", editBlog),    # blog/edit/1
+    path("<int:id>", blogDetails),  # "blog/{{blog.id}}" e.g: "blog/1"
+    path("edit/<int:id>", editBlogPage),
     path("update/<int:id>", updateBlog),
     path("delete/<int:id>", deleteBlog),
 ]
 
-writer_urlpatterns = [
+writer_urlpatterns=[
     path("dashboard", dashboard),
-    path("bloglist", blogList),  
+    path('bloglist', blogList),
+    path("blogs", myBlogs)
 ]
 
 admin_urlpatterns=[
     path('dashboard', adminDashboard)
 ]
-
-
 
 urlpatterns = [
     path("super-admin/", admin.site.urls),
@@ -64,6 +63,7 @@ urlpatterns = [
     path("writer/", include(writer_urlpatterns)),
     path("admin/", include(admin_urlpatterns)),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
