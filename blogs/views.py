@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from blogs.models import Blog, Category, BlogStats
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 @login_required(login_url='/auth/log-in')
 def addBlogPage(request):
@@ -86,7 +87,8 @@ def createBlog(request):
 
 def blogDetails(request, id):
     blog = Blog.objects.get(id=id)
-    blogstats, created = BlogStats.objects.get_or_create(blog = blog)
+    today = timezone.now()
+    blogstats, created = BlogStats.objects.get_or_create(blog = blog, created_at = today)
     blogstats.blog_clicks +=1
     blogstats.save()
     return render( request, 'pages/blogs/blogDetails.html', {"blog": blog})
