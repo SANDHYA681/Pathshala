@@ -87,9 +87,13 @@ def createBlog(request):
 
 def blogDetails(request, id):
     blog = Blog.objects.get(id=id)
-    today = timezone.now()
-    blogstats, created = BlogStats.objects.get_or_create(blog = blog, created_at = today)
+    today = timezone.now().date()
+    blogstats, created = BlogStats.objects.get_or_create(blog = blog, created_at_date = today)
     blogstats.blog_clicks +=1
+    session_key = f' unique_blog_view_{blog.id}_{today}'
+    if not request.session.get(session_key, False):
+        blogstats.unique_views +=1
+        request.session[session_key] = True
     blogstats.save()
     return render( request, 'pages/blogs/blogDetails.html', {"blog": blog})
 
