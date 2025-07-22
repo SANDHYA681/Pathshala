@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from blogs.models import Blog
+from blogs.models import Blog, BlogStats
 
 def landingPage(request):
     return render(request,'pages/index.html')
@@ -24,6 +24,7 @@ def profilePage(request):
 
 @login_required(login_url='/auth/log-in/')
 def dashboard(request):
+    blogclicks = BlogStats
     return render(request, 'pages/dashboard/writer/dashboard.html')
 
 def blogList(request):
