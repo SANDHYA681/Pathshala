@@ -24,12 +24,14 @@ def profilePage(request):
 
 @login_required(login_url='/auth/log-in/')
 def dashboard(request):
-    blogclicks = BlogStats
-    return render(request, 'pages/dashboard/writer/dashboard.html')
+    blogstats = BlogStats.objects.get()
+    blogclicks =[b.blog_clicks for b in blogstats] 
+    click_date = [b.created_at_date for b in blogstats]
+    return render(request, 'pages/dashboard/writer/dashboard.html', {"blogclicks": blogclicks})
 
 def blogList(request):
     blogs = Blog.objects.filter( author = request.user).order_by('-created_at')
-    return render(request, 'pages/dashboard/writer/blogList.html', {'blogs':blogs})
+    return render(request, 'pages/dashboard/writer/blogList.html', {"blogs":blogs})
 
 
 @login_required(login_url='/auth/log-in')
