@@ -25,7 +25,8 @@ def profilePage(request):
 
 @login_required(login_url='/auth/log-in/')
 def dashboard(request):
-    blogstats = BlogStats.objects.all()
+    user_blogs = Blog.objects.filter(author = request.user)
+    blogstats = BlogStats.objects.filter(blog__in = user_blogs).order_by('created_at')
     blog_clicks = [b.blog_clicks for b in blogstats]
     click_date = [b.created_at.strftime('%Y-%m-%d') for b in blogstats]
     return render(request, 'pages/dashboard/writer/dashboard.html', {"blog_clicks":blog_clicks, "click_date":click_date})
