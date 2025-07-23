@@ -91,7 +91,7 @@ def blogDetails(request, id):
 
     blogstats, created = BlogStats.objects.get_or_create(
         blog=blog,
-        created_at__date=today  # ✅ Corrected here
+        created_at__date=today  
     )
 
     blogstats.blog_clicks += 1
