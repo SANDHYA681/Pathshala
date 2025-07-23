@@ -1,9 +1,9 @@
 {% extends 'pages/dashboard/layouts/writer.html' %}
 {% block panel %}
   <div>
-    <h1 class="text-2xl font-bold text-blue-600">This is Writer Dashboard </h1>
-    <div class="px-4 py-2">
-      <div id="chart"></div>
+    <h1 class="text-2xl font-bold text-blue-600">This is Writer Dashboard</h1>
+    <div class="px-4 py-2 grid grid-cols-1 md:grid-cols-3">
+      <div id="chart" class="col-span-1 md:col-span-2 bg-white"></div>
     </div>
     <script>
       var options = {
@@ -14,10 +14,31 @@
           {
             name: 'Clicks',
             data: {{blog_clicks|safe}}
+          },
+          {
+            name: 'Unique Views',
+            data: {{unique_views|safe}}
           }
         ],
         xaxis: {
           categories: {{click_date|safe}}
+        },
+        yaxis: [
+    {
+      title: {
+        text: "Blog Clicks"
+      },
+    },
+    {
+      opposite: true,
+      title: {
+        text: "Unique Views"
+      }
+    }
+        ], 
+        title:{
+          text: 'Blog Clicks and Unique Views',
+          align: 'center',
         }
       }
       
