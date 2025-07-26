@@ -40,6 +40,7 @@ blog_urlpatterns = [
     path("edit/<int:id>", editBlogPage),
     path("update/<int:id>", updateBlog),
     path("delete/<int:id>", deleteBlog),
+    path('change-status/<int:id>', changeStatus),
 ]
 
 writer_urlpatterns=[
@@ -49,7 +50,8 @@ writer_urlpatterns=[
 ]
 
 admin_urlpatterns=[
-    path('dashboard', adminDashboard)
+    path('dashboard', adminDashboard),
+    path('bloglist', blogList),
 ]
 
 urlpatterns = [

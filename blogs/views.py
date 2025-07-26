@@ -109,7 +109,7 @@ def editBlogPage(request, id):
     blog = Blog.objects.get(id=id)
     categories = Category.objects.all()
     tags = ", ".join(blog.tags.names())
-    return render(request, 'pages/blogs/editBlogPage.html', {"blog": blog, "categories": categories, 'tags': tags})
+    return render(request, 'pages/blogs/editBlog.html', {"blog": blog, "categories": categories, 'tags': tags})
 
 def updateBlog(request, id):
     if request.method == "POST":
@@ -150,3 +150,15 @@ def deleteBlog(request, id):
 def myBlogs(request):
      blogs = Blog.objects.filter(author=request.user)
      return render(request, 'pages/blogs/blogs.html', {"blogs": blogs})
+ 
+def changeStatus(request,id):
+    if request.method =="POST":
+        blog = Blog.objects.get(pk=id)
+        status = request.POST.get('status')
+        blog.status= status
+        blog.save()
+        messages.success(request, "Blog Status Updated Successfully!")
+        return redirect('/admin/bloglist')
+    
+    
+     

@@ -5,7 +5,7 @@ from taggit.managers import TaggableManager
 class Category(models.Model):
     name = models.CharField(max_length=50)
     
-    def __str__(self):
+    def _str_(self):
         return self.name
 
 class Blog(models.Model):
@@ -31,7 +31,7 @@ class Blog(models.Model):
     created_at = models.DateTimeField( auto_now_add=True, editable=False )
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
-    def __str__(self):
+    def _str_(self):
         return self.title
     
 class BlogStats(models.Model):
@@ -41,5 +41,5 @@ class BlogStats(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField( auto_now=True, editable=False )
     
-    def __str__(self):
+    def _str_(self):
         return f'{self.blog.title} stats'

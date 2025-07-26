@@ -12,7 +12,7 @@
         <div class="w-20 h-20 mx-auto mb-4 rounded-full border-2 border-green-600 flex items-center justify-center shadow-lg">
           <img src="/static/images/favicon.ico" alt="Digital Pathshala Logo" />
         </div>
-        <h1 class="text-2xl font-bold text-green-800 mb-2 normal-case">Edit Blog Page</h1>
+        <h1 class="text-2xl font-bold text-green-800 mb-2 normal-case">Edit BlogPage</h1>
       </div>
       <!-- Blog Form -->
       <form class="space-y-4" method="post" action="/blog/update/{{blog.id}}" enctype="multipart/form-data">
@@ -43,9 +43,9 @@
         <div class="space-y-2">
           <label for="category" class="block text-sm font-semibold text-gray-700 normal-case">Category</label>
           <select name="category" class="w-full p-3 border-2 border-green-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none">
-            <option value="{{blog.category}}">{{blog.category}}</option>
+            <option value="{{blog.category.id}}">{{blog.category.name}}</option>
             {% for category in categories %}
-              <option value="{{ category }}">{{ category.name }}</option>
+              <option value="{{ category.id }}">{{ category.name }}</option>
             {% endfor %}
           </select>
           {% if errors.categories %}
@@ -67,7 +67,7 @@
           {% endif %}
         </div>
 
-        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors shadow-lg hover:shadow-xl" type="submit">Add Blog</button>
+        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors shadow-lg hover:shadow-xl" type="submit">Edit Blog</button>
       </form>
     </div>
   </div>
