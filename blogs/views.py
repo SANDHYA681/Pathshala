@@ -88,28 +88,20 @@ def createBlog(request):
 def blogDetails(request, id):
     blog = Blog.objects.get(id=id)
     today = timezone.now().date()
-
-    blogstats, created = BlogStats.objects.get_or_create(
-        blog=blog,
-        created_at__date=today  
-    )
-
-    blogstats.blog_clicks += 1
-
-    session_key = f'unique_blog_view{request.user.id}_{blog.id}_{today}'
+    blogstats, created = BlogStats.objects.get_or_create(blog = blog, created_at__date = today)
+    blogstats.blog_clicks +=1
+    session_key = f'unique_blog_view_{request.user.id}_{blog.id}_{today}'
     if not request.session.get(session_key, False):
-        blogstats.unique_views += 1
+        blogstats.unique_views +=1
         request.session[session_key] = True
-
     blogstats.save()
-    return render(request, 'pages/blogs/blogDetails.html', {"blog": blog})
-
+    return render( request, 'pages/blogs/blogDetails.html', {"blog": blog})
 
 def editBlogPage(request, id):
     blog = Blog.objects.get(id=id)
     categories = Category.objects.all()
     tags = ", ".join(blog.tags.names())
-    return render(request, 'pages/blogs/editBlog.html', {"blog": blog, "categories": categories, 'tags': tags})
+    return render(request, 'pages/blogs/editBlogPage.html', {"blog": blog, "categories": categories, 'tags': tags})
 
 def updateBlog(request, id):
     if request.method == "POST":
@@ -151,14 +143,12 @@ def myBlogs(request):
      blogs = Blog.objects.filter(author=request.user)
      return render(request, 'pages/blogs/blogs.html', {"blogs": blogs})
  
-def changeStatus(request,id):
-    if request.method =="POST":
+def changeStatus(request, id):
+    if request.method == "POST":
         blog = Blog.objects.get(pk=id)
         status = request.POST.get('status')
-        blog.status= status
+        blog.status = status
         blog.save()
         messages.success(request, "Blog Status Updated Successfully!")
         return redirect('/admin/bloglist')
     
-    
-     
