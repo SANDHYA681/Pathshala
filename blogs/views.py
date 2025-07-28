@@ -149,6 +149,6 @@ def changeStatus(request, id):
         status = request.POST.get('status')
         blog.status = status
         blog.save()
-        messages.success(request, "Blog Status Updated Successfully!")
+        messages.success(request, "Blog Status is Updated Successfully!")
         return redirect('/admin/bloglist')
     
