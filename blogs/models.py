@@ -5,7 +5,7 @@ from taggit.managers import TaggableManager
 class Category(models.Model):
     name = models.CharField(max_length=50)
     
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 class Blog(models.Model):
@@ -25,13 +25,13 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     tags = TaggableManager(blank=True)
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
-    image = models.ImageField(blank=True, null=True , upload_to=generateImagePath, default='static/images/blog1.png')
+    image = models.ImageField(blank=True, null=True , upload_to=generateImagePath, default='blog/blog1.png')
     attachment = models.FileField(blank=True, null=True, upload_to=generateAttachmentPath)
     status = models.CharField(max_length=8, choices=StatusOptions, default=StatusOptions.PENDING)
     created_at = models.DateTimeField( auto_now_add=True, editable=False )
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
-    def _str_(self):
+    def __str__(self):
         return self.title
     
 class BlogStats(models.Model):
@@ -41,5 +41,5 @@ class BlogStats(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField( auto_now=True, editable=False )
     
-    def _str_(self):
+    def __str__(self):
         return f'{self.blog.title} stats'
