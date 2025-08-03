@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from projects.models import Project
 def generateAttachmentPath(instance, file):
-    return f'attachments/{instance.id}/{file}'
+    return f'attachments/{instance.user.username}/{file}'
 
 class Task(models.Model):
     class statusOptions(models.TextChoices):
@@ -19,6 +19,8 @@ class Task(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     assigned_to = models.ManyToManyField(User, blank=True)  # You missed User here
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tasks")
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="tasks", blank=True, null=True)
     start_date = models.DateField(blank=True, null=True)
     due_date = models.DateField(blank=True, null=True)
     status = models.CharField(
