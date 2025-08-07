@@ -4,4 +4,5 @@ from .viewsets import ProjectViewSets
 app_name = 'projects'
 
 router = routers.DefaultRouter()
-router.register(r'project', ProjectViewSets)
+
+router.register( 'project', ProjectViewSets)
